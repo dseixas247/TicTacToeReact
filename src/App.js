@@ -2,9 +2,13 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import './App.css';
 
 import Game from "./components/Game";
+import WinnerScreen from "./components/WinnerScreen";
 
 function App() {
+  const [winner, setWinner] = useState(0);
+
   const [currentPlayer, setCurrentPlayer] = useState(1);
+
   const [gameState, setGameState] = useState({
     game1: [0,0,0, 0,0,0, 0,0,0],
     game2: [0,0,0, 0,0,0, 0,0,0],
@@ -16,7 +20,9 @@ function App() {
     game8: [0,0,0, 0,0,0, 0,0,0],
     game9: [0,0,0, 0,0,0, 0,0,0]
   });
+
   const [gameWon, setGameWon] = useState([0,0,0, 0,0,0, 0,0,0]);
+
   const [activeGame, setActiveGame] = useState("all");
 
   const updateCurrentPlayer = useCallback(() => {
@@ -51,7 +57,7 @@ function App() {
       state[0]==1 && state[4]==1 && state[8]==1 ||
       state[2]==1 && state[4]==1 && state[6]==1
     ){
-      alert("player1 wins")
+      setWinner(1);
     }
     if(
       state[0]==2 && state[1]==2 && state[2]==2 ||
@@ -63,7 +69,7 @@ function App() {
       state[0]==2 && state[4]==2 && state[8]==2 ||
       state[2]==2 && state[4]==2 && state[6]==2
     ){
-      alert("player2 wins")
+      setWinner(2);
     }
   }, [gameWon]);
 
@@ -73,6 +79,7 @@ function App() {
 
   return (
     <div className="App">
+      <WinnerScreen winner={winner}/>
       <div className={`player playerOne ${currentPlayer==1 ? 'playerActive' : 'playerInactive'}`}>Player1</div>
       <div className={`player playerTwo ${currentPlayer==2 ? 'playerActive' : 'playerInactive'}`}>Player2</div>
       <table className="Games">
