@@ -3,14 +3,16 @@
     height: 100%;
 }
 
-.Game.symbolOne.active td:hover {
-    cursor: pointer;
-    background-image: url("../../../public/Player1SymbolTransparent.png");
-    background-size: cover;
-}
+@media (hover: hover){
+    .Game.symbolOne.active td:hover {
+        cursor: pointer;
+        background-image: url("../../../public/Player1SymbolTransparent.png");
+        background-size: cover;
+    }
 
-.Game.symbolTwo.active td:hover {
-    cursor: pointer;
-    background-image: url("../../../public/Player2SymbolTransparent.png");
-    background-size: cover;
+    .Game.symbolTwo.active td:hover {
+        cursor: pointer;
+        background-image: url("../../../public/Player2SymbolTransparent.png");
+        background-size: cover;
+    }
 }
