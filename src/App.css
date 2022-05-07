@@ -1,3 +1,97 @@
+html, body, div#root {
+  display: flex;
+  background-color: whitesmoke;
+  flex-direction: column;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 0;
+}
+
 .App {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+}
+
+.Games {
+  height: fit-content;
+  width: fit-content;
+}
+
+td {
+  border: 4px solid;
+}
+
+.gameActive.one {
+  border: 4px solid red;
+}
+
+.gameActive.two {
+  border: 4px solid blue;
+}
+
+.gameWonPOne {
+  background-image: url("../public/Player1SymbolTransparent.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.gameWonPTwo {
+  background-image: url("../public/Player2SymbolTransparent.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.player {
+  width: fit-content;
+  height: fit-content;
+  font-size: larger;
+  font-weight: 750;
   text-align: center;
+}
+
+.playerOne {
+  color: red;
+  position: absolute;
+  top: 25px;
+  left: 50px;
+}
+
+.playerTwo {
+  color: blue;
+  position: absolute;
+  top: 25px;
+  right: 50px;
+}
+
+.playerActive {
+  border: 4px solid black;
+  border-radius: 5px;
+  padding: 4px 20px 8px 20px;
+}
+
+.playerActive::after {
+  content: "Your Turn";
+  font-size: medium;
+  font-weight: bold;
+  color: black;
+  padding: 0px 2px;
+  background-color: whitesmoke;
+  width: fit-content;
+  position: absolute;
+  top: -14px;
+}
+
+.playerOne.playerActive::after {
+  left: 15px;
+}
+
+.playerTwo.playerActive::after {
+  right: 15px;
+}
+
+.playerInactive {
+  padding: 4px 0px;
 }
