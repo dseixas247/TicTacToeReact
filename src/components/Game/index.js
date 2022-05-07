@@ -4,9 +4,9 @@ import styles from "./styles.module.scss";
 import Symbol from "../Symbol";
 
 function Game({name, player, gameState, activeGame, updateCurrentPlayer, updateGameState, updateGameWon, updateActiveGame}) {
+    const game = parseInt(name.replace("game", ""));
 
     const update = (position) => {
-        const game = parseInt(name.replace("game", ""));
         if(activeGame == "all" || activeGame == game){
             let state = gameState;
             if(state[position-1]==0){
@@ -39,7 +39,7 @@ function Game({name, player, gameState, activeGame, updateCurrentPlayer, updateG
     }
 
     return(
-            <table className={styles.Game}>
+            <table className={`${styles.Game} ${player==1 ? styles.symbolOne : styles.symbolTwo} ${activeGame == "all" || activeGame == game ? styles.active : ''}`}>
                 <tbody>
                     <tr>
                         <td onClick={() => update(1)}>
