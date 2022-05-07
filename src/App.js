@@ -6,17 +6,17 @@ import Game from "./components/Game";
 function App() {
   const [currentPlayer, setCurrentPlayer] = useState(1);
   const [gameState, setGameState] = useState({
-    game1: [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    game2: [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    game3: [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    game4: [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    game5: [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    game6: [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    game7: [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    game8: [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    game9: [0, 0, 0, 0, 0, 0, 0, 0, 0]
+    game1: [0,0,0, 0,0,0, 0,0,0],
+    game2: [0,0,0, 0,0,0, 0,0,0],
+    game3: [0,0,0, 0,0,0, 0,0,0],
+    game4: [0,0,0, 0,0,0, 0,0,0],
+    game5: [0,0,0, 0,0,0, 0,0,0],
+    game6: [0,0,0, 0,0,0, 0,0,0],
+    game7: [0,0,0, 0,0,0, 0,0,0],
+    game8: [0,0,0, 0,0,0, 0,0,0],
+    game9: [0,0,0, 0,0,0, 0,0,0]
   });
-  const [gameWon, setGameWon] = useState([0,0,0,0,0,0,0,0,0]);
+  const [gameWon, setGameWon] = useState([0,0,0, 0,0,0, 0,0,0]);
   const [activeGame, setActiveGame] = useState("all");
 
   const updateCurrentPlayer = useCallback(() => {
@@ -34,6 +34,38 @@ function App() {
       [game]: values
     }));
   }, [gameState]);
+
+  const updateGameWon = useCallback((player, game) => {
+    let state = gameWon;
+    if(state[game-1]==0){
+      state[game-1] = player;
+      setGameWon(state);
+    }
+    if(
+      state[0]==1 && state[1]==1 && state[2]==1 ||
+      state[3]==1 && state[4]==1 && state[5]==1 ||
+      state[6]==1 && state[7]==1 && state[8]==1 ||
+      state[0]==1 && state[3]==1 && state[6]==1 ||
+      state[1]==1 && state[4]==1 && state[7]==1 ||
+      state[2]==1 && state[5]==1 && state[8]==1 ||
+      state[0]==1 && state[4]==1 && state[8]==1 ||
+      state[2]==1 && state[4]==1 && state[6]==1
+    ){
+      alert("player1 wins")
+    }
+    if(
+      state[0]==2 && state[1]==2 && state[2]==2 ||
+      state[3]==2 && state[4]==2 && state[5]==2 ||
+      state[6]==2 && state[7]==2 && state[8]==2 ||
+      state[0]==2 && state[3]==2 && state[6]==2 ||
+      state[1]==2 && state[4]==2 && state[7]==2 ||
+      state[2]==2 && state[5]==2 && state[8]==2 ||
+      state[0]==2 && state[4]==2 && state[8]==2 ||
+      state[2]==2 && state[4]==2 && state[6]==2
+    ){
+      alert("player2 wins")
+    }
+  }, [gameWon]);
 
   const updateActiveGame = useCallback((game) => {
     setActiveGame(game);
@@ -55,6 +87,7 @@ function App() {
                 activeGame={activeGame}
                 updateCurrentPlayer={updateCurrentPlayer} 
                 updateGameState={updateGameState} 
+                updateGameWon={updateGameWon}
                 updateActiveGame={updateActiveGame}
               />
             </td>
@@ -67,6 +100,7 @@ function App() {
                 activeGame={activeGame} 
                 updateCurrentPlayer={updateCurrentPlayer} 
                 updateGameState={updateGameState} 
+                updateGameWon={updateGameWon}
                 updateActiveGame={updateActiveGame}
               />
             </td>
@@ -79,6 +113,7 @@ function App() {
                 activeGame={activeGame}
                 updateCurrentPlayer={updateCurrentPlayer} 
                 updateGameState={updateGameState} 
+                updateGameWon={updateGameWon}
                 updateActiveGame={updateActiveGame}
               />
             </td>
@@ -93,6 +128,7 @@ function App() {
                 activeGame={activeGame}
                 updateCurrentPlayer={updateCurrentPlayer} 
                 updateGameState={updateGameState} 
+                updateGameWon={updateGameWon}
                 updateActiveGame={updateActiveGame}
               />
             </td>
@@ -105,6 +141,7 @@ function App() {
                 activeGame={activeGame}
                 updateCurrentPlayer={updateCurrentPlayer} 
                 updateGameState={updateGameState} 
+                updateGameWon={updateGameWon}
                 updateActiveGame={updateActiveGame}
               />
             </td>
@@ -117,6 +154,7 @@ function App() {
                 activeGame={activeGame}
                 updateCurrentPlayer={updateCurrentPlayer} 
                 updateGameState={updateGameState} 
+                updateGameWon={updateGameWon}
                 updateActiveGame={updateActiveGame}
               />
             </td>
@@ -131,6 +169,7 @@ function App() {
                 activeGame={activeGame}
                 updateCurrentPlayer={updateCurrentPlayer} 
                 updateGameState={updateGameState} 
+                updateGameWon={updateGameWon}
                 updateActiveGame={updateActiveGame}
               />
             </td>
@@ -143,6 +182,7 @@ function App() {
                 activeGame={activeGame}
                 updateCurrentPlayer={updateCurrentPlayer} 
                 updateGameState={updateGameState} 
+                updateGameWon={updateGameWon}
                 updateActiveGame={updateActiveGame}
               />
             </td>
@@ -155,6 +195,7 @@ function App() {
                 activeGame={activeGame}
                 updateCurrentPlayer={updateCurrentPlayer} 
                 updateGameState={updateGameState} 
+                updateGameWon={updateGameWon}
                 updateActiveGame={updateActiveGame}
               />
             </td>
