@@ -44,6 +44,12 @@ td {
   background-position: center center;
 }
 
+.draw {
+  background-image: url("../public/DrawSymbol.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
 .player {
   width: fit-content;
   height: fit-content;

@@ -3,21 +3,14 @@ import styles from "./styles.module.scss";
 
 import Symbol from "../Symbol";
 
-function Game({name, player, gameState, gameWon, activeGame, updateCurrentPlayer, updateGameState, updateGameWon, updateActiveGame}) {
+function Game({name, player, gameState, gameWon, fullGames, activeGame, updateCurrentPlayer, updateGameState, updateGameWon, updateFullGames, updateActiveGame}) {
     const game = parseInt(name.replace("game", ""));
     
-    var full = true;
-
-    let state = gameState;
-    state.forEach(element => {
-        if(element == 0){
-            full = false;
-        }
-    });
-
     const update = (position) => {
         if(activeGame == "all" && gameWon[game-1]==0 || activeGame == game && gameWon[game-1]==0){
             var state = gameState;
+            var full = true;
+
             if(state[position-1]==0){
                 state[position-1] = player;
                 if(
@@ -43,11 +36,19 @@ function Game({name, player, gameState, gameWon, activeGame, updateCurrentPlayer
                     state[0]==2 && state[4]==2 && state[8]==2 ||
                     state[2]==2 && state[4]==2 && state[6]==2
                 ){
-                    console.log("updated")
                     updateGameWon(player, game);
                 }
-                updateGameState(name, state);
+                state.forEach(element => {
+                    if(element == 0){
+                        full = false;
+                    }
+                })
+                
+                if(full){
+                    updateFullGames(game);
+                }
                 updateActiveGame(position);
+                updateGameState(name, state);
                 updateCurrentPlayer();
             }
         }
@@ -55,7 +56,7 @@ function Game({name, player, gameState, gameWon, activeGame, updateCurrentPlayer
 
     return(
             <table className={`${styles.Game} ${player==1 ? styles.symbolOne : styles.symbolTwo} 
-            ${activeGame == "all" && gameWon[game-1]==0 && !full || activeGame == game ? styles.active : ''}`}>
+            ${activeGame == "all" && gameWon[game-1]==0 && !fullGames[game-1] || activeGame == game ? styles.active : ''}`}>
                 <tbody>
                     <tr>
                         <td onClick={() => update(1)}>
