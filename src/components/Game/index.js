@@ -3,35 +3,50 @@ import styles from "./styles.module.scss";
 
 import Symbol from "../Symbol";
 
-function Game({name, player, gameState, activeGame, updateCurrentPlayer, updateGameState, updateGameWon, updateActiveGame}) {
+function Game({name, player, gameState, gameWon, activeGame, updateCurrentPlayer, updateGameState, updateGameWon, updateActiveGame}) {
     const game = parseInt(name.replace("game", ""));
+    
+    var full = true;
+
+    let state = gameState;
+    state.forEach(element => {
+        if(element == 0){
+            full = false;
+        }
+    });
 
     const update = (position) => {
-        if(activeGame == "all" || activeGame == game){
-            let state = gameState;
+        if(activeGame == "all" && gameWon[game-1]==0 || activeGame == game && gameWon[game-1]==0){
+            var state = gameState;
             if(state[position-1]==0){
                 state[position-1] = player;
                 if(
                     state[0]==1 && state[1]==1 && state[2]==1 ||
                     state[3]==1 && state[4]==1 && state[5]==1 ||
                     state[6]==1 && state[7]==1 && state[8]==1 ||
+
                     state[0]==1 && state[3]==1 && state[6]==1 ||
                     state[1]==1 && state[4]==1 && state[7]==1 ||
                     state[2]==1 && state[5]==1 && state[8]==1 ||
+
                     state[0]==1 && state[4]==1 && state[8]==1 ||
                     state[2]==1 && state[4]==1 && state[6]==1 ||
+
                     state[0]==2 && state[1]==2 && state[2]==2 ||
                     state[3]==2 && state[4]==2 && state[5]==2 ||
                     state[6]==2 && state[7]==2 && state[8]==2 ||
+
                     state[0]==2 && state[3]==2 && state[6]==2 ||
                     state[1]==2 && state[4]==2 && state[7]==2 ||
                     state[2]==2 && state[5]==2 && state[8]==2 ||
+
                     state[0]==2 && state[4]==2 && state[8]==2 ||
                     state[2]==2 && state[4]==2 && state[6]==2
                 ){
-                    updateGameWon(player, activeGame);
+                    console.log("updated")
+                    updateGameWon(player, game);
                 }
-                updateGameState(game, state);
+                updateGameState(name, state);
                 updateActiveGame(position);
                 updateCurrentPlayer();
             }
@@ -39,7 +54,8 @@ function Game({name, player, gameState, activeGame, updateCurrentPlayer, updateG
     }
 
     return(
-            <table className={`${styles.Game} ${player==1 ? styles.symbolOne : styles.symbolTwo} ${activeGame == "all" || activeGame == game ? styles.active : ''}`}>
+            <table className={`${styles.Game} ${player==1 ? styles.symbolOne : styles.symbolTwo} 
+            ${activeGame == "all" && gameWon[game-1]==0 && !full || activeGame == game ? styles.active : ''}`}>
                 <tbody>
                     <tr>
                         <td onClick={() => update(1)}>
