@@ -23,7 +23,7 @@ function App() {
 
   const [gameWon, setGameWon] = useState([0,0,0, 0,0,0, 0,0,0]);
 
-  const [activeGame, setActiveGame] = useState("all");
+  const [activeGame, setActiveGame] = useState('all');
 
   const updateCurrentPlayer = useCallback(() => {
     if(currentPlayer == 1){
@@ -82,10 +82,10 @@ function App() {
       <WinnerScreen winner={winner}/>
       <div className={`player playerOne ${currentPlayer==1 ? 'playerActive' : 'playerInactive'}`}>Player1</div>
       <div className={`player playerTwo ${currentPlayer==2 ? 'playerActive' : 'playerInactive'}`}>Player2</div>
-      <table className="Games">
+      <table className='Games'>
         <tbody>
           <tr>
-            <td className={`${currentPlayer==1 ? 'one' : 'two'} ${activeGame==1 ? 'gameActive' : ''} 
+            <td className={`${currentPlayer==1 ? 'one' : 'two'} ${activeGame=='all' || activeGame==1 ? 'gameActive' : ''} 
             ${gameWon[0]==1 ? 'gameWonPOne' : ''} ${gameWon[0]==2 ? 'gameWonPTwo' : ''}`}>
               <Game 
                 name="game1" 
@@ -98,7 +98,7 @@ function App() {
                 updateActiveGame={updateActiveGame}
               />
             </td>
-            <td className={`${currentPlayer==1 ? 'one' : 'two'} ${activeGame==2 ? 'gameActive' : ''} 
+            <td className={`${currentPlayer==1 ? 'one' : 'two'} ${activeGame=='all' || activeGame==2 ? 'gameActive' : ''} 
             ${gameWon[1]==1 ? 'gameWonPOne' : ''} ${gameWon[1]==2 ? 'gameWonPTwo' : ''}`}>
               <Game 
                 name="game2" 
@@ -111,7 +111,7 @@ function App() {
                 updateActiveGame={updateActiveGame}
               />
             </td>
-            <td className={`${currentPlayer==1 ? 'one' : 'two'} ${activeGame==3 ? 'gameActive' : ''} 
+            <td className={`${currentPlayer==1 ? 'one' : 'two'} ${activeGame=='all' || activeGame==3 ? 'gameActive' : ''} 
             ${gameWon[2]==1 ? 'gameWonPOne' : ''} ${gameWon[2]==2 ? 'gameWonPTwo' : ''}`}>
               <Game 
                 name="game3" 
@@ -126,7 +126,7 @@ function App() {
             </td>
           </tr>
           <tr>
-            <td className={`${currentPlayer==1 ? 'one' : 'two'} ${activeGame==4 ? 'gameActive' : ''} 
+            <td className={`${currentPlayer==1 ? 'one' : 'two'} ${activeGame=='all' || activeGame==4 ? 'gameActive' : ''} 
             ${gameWon[3]==1 ? 'gameWonPOne' : ''} ${gameWon[3]==2 ? 'gameWonPTwo' : ''}`}>
               <Game 
                 name="game4" 
@@ -139,7 +139,7 @@ function App() {
                 updateActiveGame={updateActiveGame}
               />
             </td>
-            <td className={`${currentPlayer==1 ? 'one' : 'two'} ${activeGame==5 ? 'gameActive' : ''} 
+            <td className={`${currentPlayer==1 ? 'one' : 'two'} ${activeGame=='all' || activeGame==5 ? 'gameActive' : ''} 
             ${gameWon[4]==1 ? 'gameWonPOne' : ''} ${gameWon[4]==2 ? 'gameWonPTwo' : ''}`}>
               <Game 
                 name="game5" 
@@ -152,7 +152,7 @@ function App() {
                 updateActiveGame={updateActiveGame}
               />
             </td>
-            <td className={`${currentPlayer==1 ? 'one' : 'two'} ${activeGame==6 ? 'gameActive' : ''} 
+            <td className={`${currentPlayer==1 ? 'one' : 'two'} ${activeGame=='all' || activeGame==6 ? 'gameActive' : ''} 
             ${gameWon[5]==1 ? 'gameWonPOne' : ''} ${gameWon[5]==2 ? 'gameWonPTwo' : ''}`}>
               <Game 
                 name="game6" 
@@ -167,7 +167,7 @@ function App() {
             </td>
           </tr>
           <tr>
-            <td className={`${currentPlayer==1 ? 'one' : 'two'} ${activeGame==7 ? 'gameActive' : ''} 
+            <td className={`${currentPlayer==1 ? 'one' : 'two'} ${activeGame=='all' || activeGame==7 ? 'gameActive' : ''} 
             ${gameWon[6]==1 ? 'gameWonPOne' : ''} ${gameWon[6]==2 ? 'gameWonPTwo' : ''}`}>
               <Game 
                 name="game7" 
@@ -180,7 +180,7 @@ function App() {
                 updateActiveGame={updateActiveGame}
               />
             </td>
-            <td className={`${currentPlayer==1 ? 'one' : 'two'} ${activeGame==8 ? 'gameActive' : ''} 
+            <td className={`${currentPlayer==1 ? 'one' : 'two'} ${activeGame=='all' || activeGame==8 ? 'gameActive' : ''} 
             ${gameWon[7]==1 ? 'gameWonPOne' : ''} ${gameWon[7]==2 ? 'gameWonPTwo' : ''}`}>
               <Game 
                 name="game8" 
@@ -193,7 +193,7 @@ function App() {
                 updateActiveGame={updateActiveGame}
               />
             </td>
-            <td className={`${currentPlayer==1 ? 'one' : 'two'} ${activeGame==9 ? 'gameActive' : ''} 
+            <td className={`${currentPlayer==1 ? 'one' : 'two'} ${activeGame=='all' || activeGame==9 ? 'gameActive' : ''} 
             ${gameWon[8]==1 ? 'gameWon' : ''} ${gameWon[8]==2 ? 'gameWonPTwo' : ''}`}>
               <Game 
                 name="game9" 
