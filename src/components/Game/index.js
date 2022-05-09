@@ -6,6 +6,7 @@ import Symbol from "../Symbol";
 function Game({name, player, gameState, gameWon, fullGames, activeGame, 
     updateCurrentPlayer, updateGameState, updateGameWon, updateFullGames, updateActiveGame, updateSave}) {
     const game = parseInt(name.replace("game", ""));
+    if(name=='game5'){console.log(gameState)};
     
     const update = (position) => {
         if(activeGame == "all" && gameWon[game-1]==0 || activeGame == game && gameWon[game-1]==0){
@@ -13,7 +14,7 @@ function Game({name, player, gameState, gameWon, fullGames, activeGame,
             var full = true;
 
             if(state[position-1]==0){
-                state[position-1] = player;
+                state[position-1] = parseInt(player);
                 if(
                     state[0]==1 && state[1]==1 && state[2]==1 ||
                     state[3]==1 && state[4]==1 && state[5]==1 ||

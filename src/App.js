@@ -9,6 +9,8 @@ import WinnerScreen from "./components/WinnerScreen";
 function App() {
   const cookies = new Cookies();
 
+  const saveFile = cookies.getAll();
+
   const [setup, setSetup] = useState(false);
 
   const [winner, setWinner] = useState(0);
@@ -123,15 +125,30 @@ function App() {
     setFullGames(state);
   }, [fullGames]);
 
-  const updateSetup = useCallback(() =>{
+  const updateSetup = useCallback(() => {
     setSetup(!setup);
   }, [setup]);
 
-  const updateSave = useCallback(() =>{
+  const updateSave = useCallback((start) => {
+    if(start){
+      cookies.set('currentPlayer', 1);
+      cookies.set('activeGame', 'all');
+      cookies.set('winner', 0);
+    }
     cookies.set('gameState', gameState);
     cookies.set('gameWon', gameWon);
     cookies.set('fullGames', fullGames);
-  },[])
+  }, [gameState]);
+
+  const loadSave = useCallback((savedGameState, savedCurrentPlayer, savedActiveGame, 
+    savedGameWon, savedFullGames, savedWinner) => {
+      setGameState(savedGameState);
+      setCurrentPlayer(savedCurrentPlayer);
+      setActiveGame(savedActiveGame);
+      setGameWon(savedGameWon);
+      setFullGames(savedFullGames);
+      setWinner(savedWinner);
+  }, [gameState, currentPlayer, activeGame, gameWon, fullGames, winner])
 
   if(setup){
     return (
@@ -308,7 +325,8 @@ function App() {
   else{
     return(
       <div className="App">
-        <SetupScreen nameOne={gameState.player1} nameTwo={gameState.player2} updateGameState={updateGameState} updateSetup={updateSetup}/>
+        <SetupScreen nameOne={gameState.player1} nameTwo={gameState.player2} saveFile={saveFile}
+        updateGameState={updateGameState} updateSetup={updateSetup} updateSave={updateSave} loadSave={loadSave}/>
       </div>
     );
   }

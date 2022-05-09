@@ -73,6 +73,13 @@
     border-radius: 5px;
 }
 
+.choices {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
 .button {
     color: whitesmoke;
     font-size: 5vh;
