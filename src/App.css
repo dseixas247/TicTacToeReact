@@ -53,23 +53,41 @@ td {
 .player {
   width: fit-content;
   height: fit-content;
-  font-size: larger;
+  font-size: x-large;
   font-weight: 750;
   text-align: center;
 }
 
-.playerOne {
-  color: red;
-  position: absolute;
-  top: 25px;
-  left: 50px;
+@media screen and (max-width: 999px) {
+  .playerOne {
+    color: red;
+    position: absolute;
+    top: 50px;
+    right: 50vw;
+  }
+
+  .playerTwo {
+    color: blue;
+    position: absolute;
+    top: 50px;
+    left: 50vw;
+  }
 }
 
-.playerTwo {
-  color: blue;
-  position: absolute;
-  top: 25px;
-  right: 50px;
+@media screen and (min-width: 999px) {
+  .playerOne {
+    color: red;
+    position: absolute;
+    top: 50px;
+    left: 10vw;
+  }
+
+  .playerTwo {
+    color: blue;
+    position: absolute;
+    top: 50px;
+    right: 10vw;
+  }
 }
 
 .playerActive {
