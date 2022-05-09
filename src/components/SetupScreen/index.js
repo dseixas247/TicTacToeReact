@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import Cookies from "universal-cookie";
 import styles from "./styles.module.scss";
 
-function SetupScreen({nameOne, nameTwo, saveFile, updateGameState, updateSetup, updateSave, loadSave}) { 
+function SetupScreen({currentPlayer, nameOne, nameTwo, saveFile, updateCurrentPlayer, updateGameState, updateSetup, updateSave, loadSave}) { 
     const cookies = new Cookies();
 
     const startNewGame = () => {
@@ -59,6 +59,14 @@ function SetupScreen({nameOne, nameTwo, saveFile, updateGameState, updateSetup, 
                 </div>
                 <div className={styles.nameInputs}>
                     <input className={styles.playerOne} type="text" value={nameOne} onChange={e => updateGameState('player1', e.target.value)}/>
+                    <div className={styles.goesFirst}>
+                        {`${currentPlayer==1 ? nameOne : nameTwo}`}
+                        <label className={styles.switch}>
+                            <input type="checkbox" onClick={() => updateCurrentPlayer()}/>
+                            <span className={styles.slider}/>
+                        </label>
+                        goes first
+                    </div>
                     <input className={styles.playerTwo} type="text" value={nameTwo} onChange={e => updateGameState('player2', e.target.value)}/>
                 </div>
                 <div className={styles.button} onClick={() => startNewGame()}>

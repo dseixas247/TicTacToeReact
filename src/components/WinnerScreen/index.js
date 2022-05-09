@@ -20,7 +20,15 @@ function WinnerScreen({winner, nameOne, nameTwo}) {
             game8: [0,0,0, 0,0,0, 0,0,0],
             game9: [0,0,0, 0,0,0, 0,0,0]
         })
-        cookies.set('currentPlayer', 1);
+        if(winner==1){
+            cookies.set('currentPlayer', 2);
+        }
+        if(winner==2){
+            cookies.set('currentPlayer', 1);
+        }
+        if(winner==3){
+            cookies.set('currentPlayer', Math.floor(Math.random() * 2)+1)
+        }
         cookies.set('activeGame', 'all');
         cookies.set('gameWon', [0,0,0, 0,0,0, 0,0,0]);
         cookies.set('fullGames', [false,false,false, false,false,false, false,false,false]);

@@ -325,8 +325,8 @@ function App() {
   else{
     return(
       <div className="App">
-        <SetupScreen nameOne={gameState.player1} nameTwo={gameState.player2} saveFile={saveFile}
-        updateGameState={updateGameState} updateSetup={updateSetup} updateSave={updateSave} loadSave={loadSave}/>
+        <SetupScreen currentPlayer={currentPlayer} nameOne={gameState.player1} nameTwo={gameState.player2} saveFile={saveFile} 
+        updateCurrentPlayer={updateCurrentPlayer} updateGameState={updateGameState} updateSetup={updateSetup} updateSave={updateSave} loadSave={loadSave}/>
       </div>
     );
   }
