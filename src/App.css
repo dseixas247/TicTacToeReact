@@ -8,6 +8,7 @@ html, body, div#root {
 }
 
 .App {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -51,11 +52,12 @@ td {
 }
 
 .player {
-  width: fit-content;
+  width: 100px;
   height: fit-content;
   font-size: x-large;
   font-weight: 750;
   text-align: center;
+  overflow-wrap: break-word;
 }
 
 @media screen and (max-width: 999px) {
@@ -79,14 +81,14 @@ td {
     color: red;
     position: absolute;
     top: 50px;
-    left: 10vw;
+    left: 8vw;
   }
 
   .playerTwo {
     color: blue;
     position: absolute;
     top: 50px;
-    right: 10vw;
+    right: 8vw;
   }
 }
 
@@ -109,11 +111,11 @@ td {
 }
 
 .playerOne.playerActive::after {
-  left: 15px;
+  left: 30px;
 }
 
 .playerTwo.playerActive::after {
-  right: 15px;
+  right: 30px;
 }
 
 .playerInactive {
