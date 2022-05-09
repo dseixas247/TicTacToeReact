@@ -26,6 +26,11 @@ function SetupScreen({nameOne, nameTwo, saveFile, updateGameState, updateSetup, 
         window.location.href = '/';
     }
 
+    if(saveFile.restart){
+        cookies.remove('restart');
+        continueGame();
+    }
+
     if(saveFile.gameState != undefined){
         return(
             <div className={styles.window}>

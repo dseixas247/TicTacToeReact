@@ -153,7 +153,7 @@ function App() {
   if(setup){
     return (
       <div className="App">
-        <WinnerScreen winner={winner}/>
+        <WinnerScreen winner={winner} nameOne={saveFile.gameState.player1} nameTwo={saveFile.gameState.player2}/>
         <div className={`player playerOne ${currentPlayer==1 ? 'playerActive' : 'playerInactive'}`}>{gameState.player1}</div>
         <div className={`player playerTwo ${currentPlayer==2 ? 'playerActive' : 'playerInactive'}`}>{gameState.player2}</div>
         <table className='Games'>
