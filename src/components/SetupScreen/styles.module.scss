@@ -41,6 +41,16 @@
     align-items: center;
 }
 
+@media screen and (max-width: 999px){
+    .nameInputs {
+        flex-direction: column;
+    }
+
+    .nameInputs input {
+        margin: 5px 0px;
+    }
+}
+
 .nameInputs input {
     font-size: x-large;
     font-weight: bolder;
