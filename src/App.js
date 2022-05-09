@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import Cookies from "universal-cookie";
 import './App.css';
 
 import Game from "./components/Game";
@@ -6,6 +7,8 @@ import SetupScreen from "./components/SetupScreen";
 import WinnerScreen from "./components/WinnerScreen";
 
 function App() {
+  const cookies = new Cookies();
+
   const [setup, setSetup] = useState(false);
 
   const [winner, setWinner] = useState(0);
@@ -35,9 +38,11 @@ function App() {
   const updateCurrentPlayer = useCallback(() => {
     if(currentPlayer == 1){
       setCurrentPlayer(2);
+      cookies.set('currentPlayer', 2);
     }
     else{
       setCurrentPlayer(1);
+      cookies.set('currentPlayer', 1);
     }
     if(
       fullGames[0] &&
@@ -51,6 +56,7 @@ function App() {
       fullGames[8]
     ){
       setWinner(3);
+      cookies.set('winner', 3);
     }
   }, [currentPlayer]);
 
@@ -81,6 +87,7 @@ function App() {
       state[2]==1 && state[4]==1 && state[6]==1
     ){
       setWinner(1);
+      cookies.set('winner', 1);
     }
     if(
       state[0]==2 && state[1]==2 && state[2]==2 ||
@@ -95,15 +102,18 @@ function App() {
       state[2]==2 && state[4]==2 && state[6]==2
     ){
       setWinner(2);
+      cookies.set('winner', 2);
     }
   }, [gameWon]);
 
   const updateActiveGame = useCallback((game) => {
     if(gameWon[game-1]!=0 || fullGames[game-1]){
       setActiveGame('all');
+      cookies.set('activeGame', 'all');
     }
     else{
       setActiveGame(game);
+      cookies.set('activeGame', game);
     } 
   }, [activeGame]);
 
@@ -116,6 +126,12 @@ function App() {
   const updateSetup = useCallback(() =>{
     setSetup(!setup);
   }, [setup]);
+
+  const updateSave = useCallback(() =>{
+    cookies.set('gameState', gameState);
+    cookies.set('gameWon', gameWon);
+    cookies.set('fullGames', fullGames);
+  },[])
 
   if(setup){
     return (
@@ -140,6 +156,7 @@ function App() {
                   updateGameWon={updateGameWon}
                   updateFullGames={updateFullGames}
                   updateActiveGame={updateActiveGame}
+                  updateSave={updateSave}
                 />
               </td>
               <td className={`${currentPlayer==1 ? 'one' : 'two'} ${activeGame=='all' && gameWon[1]==0 && !fullGames[1] || activeGame==2 ? 'gameActive' : ''} 
@@ -156,6 +173,7 @@ function App() {
                   updateGameWon={updateGameWon}
                   updateFullGames={updateFullGames}
                   updateActiveGame={updateActiveGame}
+                  updateSave={updateSave}
                 />
               </td>
               <td className={`${currentPlayer==1 ? 'one' : 'two'} ${activeGame=='all' && gameWon[2]==0 && !fullGames[2] || activeGame==3 ? 'gameActive' : ''} 
@@ -172,6 +190,7 @@ function App() {
                   updateGameWon={updateGameWon}
                   updateFullGames={updateFullGames}
                   updateActiveGame={updateActiveGame}
+                  updateSave={updateSave}
                 />
               </td>
             </tr>
@@ -190,6 +209,7 @@ function App() {
                   updateGameWon={updateGameWon}
                   updateFullGames={updateFullGames}
                   updateActiveGame={updateActiveGame}
+                  updateSave={updateSave}
                 />
               </td>
               <td className={`${currentPlayer==1 ? 'one' : 'two'} ${activeGame=='all' && gameWon[4]==0 && !fullGames[4] || activeGame==5 ? 'gameActive' : ''} 
@@ -206,6 +226,7 @@ function App() {
                   updateGameWon={updateGameWon}
                   updateFullGames={updateFullGames}
                   updateActiveGame={updateActiveGame}
+                  updateSave={updateSave}
                 />
               </td>
               <td className={`${currentPlayer==1 ? 'one' : 'two'} ${activeGame=='all' && gameWon[5]==0 && !fullGames[5] || activeGame==6 ? 'gameActive' : ''} 
@@ -222,6 +243,7 @@ function App() {
                   updateGameWon={updateGameWon}
                   updateFullGames={updateFullGames}
                   updateActiveGame={updateActiveGame}
+                  updateSave={updateSave}
                 />
               </td>
             </tr>
@@ -240,6 +262,7 @@ function App() {
                   updateGameWon={updateGameWon}
                   updateFullGames={updateFullGames}
                   updateActiveGame={updateActiveGame}
+                  updateSave={updateSave}
                 />
               </td>
               <td className={`${currentPlayer==1 ? 'one' : 'two'} ${activeGame=='all' && gameWon[7]==0 && !fullGames[7] || activeGame==8 ? 'gameActive' : ''} 
@@ -256,6 +279,7 @@ function App() {
                   updateGameWon={updateGameWon}
                   updateFullGames={updateFullGames}
                   updateActiveGame={updateActiveGame}
+                  updateSave={updateSave}
                 />
               </td>
               <td className={`${currentPlayer==1 ? 'one' : 'two'} ${activeGame=='all' && gameWon[8]==0 && !fullGames[8] || activeGame==9 ? 'gameActive' : ''} 
@@ -272,6 +296,7 @@ function App() {
                   updateGameWon={updateGameWon}
                   updateFullGames={updateFullGames}
                   updateActiveGame={updateActiveGame}
+                  updateSave={updateSave}
                 />
               </td>
             </tr>

@@ -3,14 +3,6 @@ import styles from "./styles.module.scss";
 
 function SetupScreen({nameOne, nameTwo, updateGameState, updateSetup}) { 
 
-    const updateName = (key, name) => {
-        updateGameState(key, name);
-    }
-
-    const start = () => {
-        updateSetup();
-    }
-
     return(
         <div className={styles.window}>
             <div className={styles.titleBox}>
@@ -21,7 +13,7 @@ function SetupScreen({nameOne, nameTwo, updateGameState, updateSetup}) {
                 <input className={styles.playerOne} type="text" value={nameOne} onChange={e => updateGameState('player1', e.target.value)}/>
                 <input className={styles.playerTwo} type="text" value={nameTwo} onChange={e => updateGameState('player2', e.target.value)}/>
             </div>
-            <div className={styles.button} onClick={() => start()}>
+            <div className={styles.button} onClick={() => updateSetup()}>
                 Play
             </div>
         </div>

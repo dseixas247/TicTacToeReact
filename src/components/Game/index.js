@@ -3,7 +3,8 @@ import styles from "./styles.module.scss";
 
 import Symbol from "../Symbol";
 
-function Game({name, player, gameState, gameWon, fullGames, activeGame, updateCurrentPlayer, updateGameState, updateGameWon, updateFullGames, updateActiveGame}) {
+function Game({name, player, gameState, gameWon, fullGames, activeGame, 
+    updateCurrentPlayer, updateGameState, updateGameWon, updateFullGames, updateActiveGame, updateSave}) {
     const game = parseInt(name.replace("game", ""));
     
     const update = (position) => {
@@ -50,6 +51,7 @@ function Game({name, player, gameState, gameWon, fullGames, activeGame, updateCu
                 updateActiveGame(position);
                 updateGameState(name, state);
                 updateCurrentPlayer();
+                updateSave();
             }
         }
     }
