@@ -6,7 +6,6 @@ import Symbol from "../Symbol";
 function Game({name, player, gameState, gameWon, fullGames, activeGame, 
     updateCurrentPlayer, updateGameState, updateGameWon, updateFullGames, updateActiveGame, updateSave}) {
     const game = parseInt(name.replace("game", ""));
-    if(name=='game5'){console.log(gameState)};
     
     const update = (position) => {
         if(activeGame == "all" && gameWon[game-1]==0 || activeGame == game && gameWon[game-1]==0){
