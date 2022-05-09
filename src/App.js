@@ -17,8 +17,8 @@ function App() {
     game5: [0,0,0, 0,0,0, 0,0,0],
     game6: [0,0,0, 0,0,0, 0,0,0],
     game7: [0,0,0, 0,0,0, 0,0,0],
-    game8: [0,0,0, 1,1,0, 0,0,0],
-    game9: [1,2,1, 2,0,2, 2,1,2]
+    game8: [0,0,0, 0,0,0, 0,0,0],
+    game9: [0,0,0, 0,0,0, 0,0,0]
   });
 
   const [fullGames, setFullGames] = useState([false,false,false, false,false,false, false,false,false]);
