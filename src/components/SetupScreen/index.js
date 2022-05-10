@@ -124,7 +124,7 @@ function SetupScreen({currentPlayer, nameOne, nameTwo, saveFile, updateCurrentPl
     }
     else if(leaderBoardOpen){
         return(
-            <div className={styles.window}>
+            <div className={styles.leaderBoardWindow}>
                 <div className={`${styles.button} ${styles.close}`} onClick={() => updateLeaderBoardOpen()}>
                         <CloseIcon/>
                 </div>
