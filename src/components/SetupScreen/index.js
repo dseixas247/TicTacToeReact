@@ -16,10 +16,22 @@ function SetupScreen({currentPlayer, nameOne, nameTwo, saveFile, updateCurrentPl
     }
     
     const [leaderBoardOpen, setLeaderBoardOpen] = useState(false); 
+    const [validNames, setValidNames] = useState(true);
+
+    useEffect(() => {
+        if(nameOne == nameTwo || nameOne == '' || nameTwo == ''){
+            setValidNames(false);
+        }
+        else{
+            setValidNames(true);
+        }
+    }, [nameOne, nameTwo])
 
     const startNewGame = () => {
-        updateSave(true);
-        updateSetup();
+        if(validNames){
+            updateSave(true);
+            updateSetup();
+        }
     }
 
     const continueGame = () => {
@@ -84,7 +96,7 @@ function SetupScreen({currentPlayer, nameOne, nameTwo, saveFile, updateCurrentPl
                         {item.score[2]}
                     </td>
                     <td>
-                        {item.score[0] / (item.score[0] + item.score[1] + item.score[2]) + '%'}
+                        {(item.score[0] / (item.score[0] + item.score[1] + item.score[2])) * 100 + '%'}
                     </td>
                 </tr>
             );
@@ -145,7 +157,7 @@ function SetupScreen({currentPlayer, nameOne, nameTwo, saveFile, updateCurrentPl
                 </div>
                 
                 <div className={styles.nameInputs}>
-                    <input className={styles.playerOne} type="text" value={nameOne} onChange={e => updateGameState('player1', e.target.value)}/>
+                    <input className={styles.playerOne} type="text" value={nameOne} onChange={e => {updateGameState('player1', e.target.value.replace(/\s+/g, ''));}}/>
                     <div className={styles.goesFirst}>
                         {`${currentPlayer==1 ? nameOne : nameTwo}`}
                         <label className={styles.switch}>
@@ -154,13 +166,13 @@ function SetupScreen({currentPlayer, nameOne, nameTwo, saveFile, updateCurrentPl
                         </label>
                         goes first
                     </div>
-                    <input className={styles.playerTwo} type="text" value={nameTwo} onChange={e => updateGameState('player2', e.target.value)}/>
+                    <input className={styles.playerTwo} type="text" value={nameTwo} onChange={e => {updateGameState('player2', e.target.value.replace(/\s+/g, ''));}}/>
                 </div>
                 <div className={styles.choices}>
                     <div className={`${styles.button} ${styles.leaderBoardButton}`} onClick={() => updateLeaderBoardOpen()}>
                         <LeaderboardIcon/>
                     </div>
-                    <div className={styles.button} onClick={() => startNewGame()}>
+                    <div className={validNames ? styles.button : styles.disabledButton} onClick={() => startNewGame()}>
                         Play
                     </div>
                 </div>

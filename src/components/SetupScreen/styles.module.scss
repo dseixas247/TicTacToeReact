@@ -159,6 +159,19 @@ input:checked + .slider:before {
     background-color: gray;
 }
 
+.disabledButton {
+    color: gray;
+    font-size: 5vh;
+    font-weight: bold;
+    text-align: center;
+    width: fit-content;
+    border: 4px solid gray;
+    border-radius: 5px;
+    background-color: gray;
+    padding: 0px 4px 4px 4px;
+    margin: 0px 10px;
+}
+
 .close {
     width: 50px;
     margin: -1px -1px;
