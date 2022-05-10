@@ -137,7 +137,7 @@ input:checked + .slider:before {
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
 }
 
 .button {
@@ -150,10 +150,48 @@ input:checked + .slider:before {
     border-radius: 5px;
     background-color: black;
     padding: 0px 4px 4px 4px;
+    margin: 0px 10px;
 }
 
 .button:hover {
     cursor: pointer;
     border: 4px solid gray;
     background-color: gray;
+}
+
+.close {
+    width: 50px;
+    margin: -1px -1px;
+    border-radius: 0px 0px 5px 0px ;
+}
+
+.leaderBoardButton {
+    width: 70px;
+}
+
+.leaderBoardWindow {
+    display: flex;
+    flex-direction: column;
+    background: whitesmoke;
+    position: absolute;
+    z-index: 1;
+    width: 95vw;
+    height: 95vh;
+
+    color: black;
+    border: 10px solid black;
+    border-radius: 5px;
+
+    font-size: 5vh;
+    font-weight: bolder;
+    text-align: center;
+}
+
+.leaderBoard {
+    width: 100%;
+    overflow: auto;
+}
+
+.leaderBoard table {
+    width: 100%;
 }

@@ -144,39 +144,67 @@ function App() {
   }, [gameState]);
 
   const updateLeaderBoard = useCallback((playerWon, playerLost) => {
-    const leaderBoard = cookies.get('leaderBoard');
-    if(playerWon != 3){
-      const nameWon = playerWon==1 ? gameState.player1 : gameState.player2;
-      const nameLost = playerLost==1 ? gameState.player1 : gameState.player2;
-    
-      if(leaderBoard == undefined){
-        cookies.set('leaderBoard', [{name: nameWon, score: [1,0,0]}, {name: nameLost, score: [0,1,0]}]);
+    const nameOne = cookies.get('gameState').player1;
+    const nameTwo = cookies.get('gameState').player2;
+
+    if(nameOne != "Player 1" && nameTwo != "Player 2"){
+      const leaderBoard = cookies.get('leaderBoard');
+
+      if(playerWon != 3){
+        const nameWon = playerWon==1 ? nameOne : nameTwo;
+        const nameLost = playerLost==1 ? nameOne : nameTwo;
+      
+        if(leaderBoard == undefined){
+          cookies.set('leaderBoard', [{name: nameWon, score: [1,0,0]}, {name: nameLost, score: [0,1,0]}]);
+        }
+        else{
+          const winnerInList = (element) => element.name == nameWon;
+          const loserInList = (element) => element.name == nameLost;
+
+          if(leaderBoard.find(winnerInList) != undefined){
+            leaderBoard.find(winnerInList).score[0]++;
+          }
+          else{
+            leaderBoard.push({name: nameWon, score: [1,0,0]});
+          }
+          
+          if(leaderBoard.find(loserInList) != undefined){
+            leaderBoard.find(loserInList).score[1]++;
+          }
+          else{
+            leaderBoard.push({name: nameLost, score: [0,1,0]});
+          }
+          
+          cookies.set('leaderBoard', leaderBoard);
+        }
       }
+
       else{
-        const winnerInList = (element) => element.name == nameWon;
-        const loserInList = (element) => element.name == nameLost;
-        leaderBoard.find(winnerInList).score[0]++;
-        leaderBoard.find(loserInList).score[1]++;
-        cookies.set('leaderBoard', leaderBoard);
+        if(leaderBoard == undefined){
+          cookies.set('leaderBoard', [{name: nameOne, score: [0,0,1]}, {name: nameTwo, score: [0,0,1]}]);
+        }
+        else{
+          const playerOneInList = (element) => element.name == nameOne;
+          const playerTwoInList = (element) => element.name == nameTwo;
+
+          if(leaderBoard.find(playerOneInList) != undefined){
+            leaderBoard.find(playerOneInList).score[2]++;
+          }
+          else{
+            leaderBoard.push({name: nameOne, score: [0,0,1]});
+          }
+          if(leaderBoard.find(playerTwoInList) != undefined){
+            leaderBoard.find(playerTwoInList).score[2]++;
+          }
+          else{
+            leaderBoard.push({name: nameTwo, score: [0,0,1]});
+          }
+          
+          cookies.set('leaderBoard', leaderBoard);
+        }
       }
     }
-    else{
-      const nameOne = gameState.player1;
-      const nameTwo = gameState.player2;
-
-      if(leaderBoard == undefined){
-        cookies.set('leaderBoard', [{name: nameOne, score: [0,0,1]}, {name: nameTwo, score: [0,0,1]}]);
-      }
-
-      else{
-        const playerOneInList = (element) => element.name == nameOne;
-        const playerTwoInList = (element) => element.name == nameTwo;
-        leaderBoard.find(playerOneInList).score[2]++;
-        leaderBoard.find(playerTwoInList).score[2]++;
-        cookies.set('leaderBoard', leaderBoard);
-      }
-    }
-  }, []);
+  }, [gameState]);
 
   const loadSave = useCallback((savedGameState, savedCurrentPlayer, savedActiveGame, 
     savedGameWon, savedFullGames, savedWinner) => {

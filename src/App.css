@@ -7,6 +7,21 @@ html, body, div#root {
   z-index: 0;
 }
 
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: white;
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: black;
+  border: 1px solid white;
+  border-radius: 8px;
+}
+
 .App {
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   display: flex;

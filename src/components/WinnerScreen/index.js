@@ -38,6 +38,11 @@ function WinnerScreen({winner, nameOne, nameTwo}) {
 
     const mainMenu = () => {
         cookies.remove('gameState');
+        cookies.remove('currentPlayer');
+        cookies.remove('activeGames');
+        cookies.remove('gameWon');
+        cookies.remove('fullFields');
+        cookies.remove('winner');
         
         window.location.href = "/"
     }
