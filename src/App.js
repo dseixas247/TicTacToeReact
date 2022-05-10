@@ -58,6 +58,7 @@ function App() {
       fullGames[8]
     ){
       setWinner(3);
+      updateLeaderBoard(3,3);
       cookies.set('winner', 3);
     }
   }, [currentPlayer]);
@@ -89,6 +90,7 @@ function App() {
       state[2]==1 && state[4]==1 && state[6]==1
     ){
       setWinner(1);
+      updateLeaderBoard(1,2);
       cookies.set('winner', 1);
     }
     if(
@@ -104,6 +106,7 @@ function App() {
       state[2]==2 && state[4]==2 && state[6]==2
     ){
       setWinner(2);
+      updateLeaderBoard(2,1);
       cookies.set('winner', 2);
     }
   }, [gameWon]);
@@ -139,6 +142,41 @@ function App() {
     cookies.set('gameWon', gameWon);
     cookies.set('fullGames', fullGames);
   }, [gameState]);
+
+  const updateLeaderBoard = useCallback((playerWon, playerLost) => {
+    const leaderBoard = cookies.get('leaderBoard');
+    if(playerWon != 3){
+      const nameWon = playerWon==1 ? gameState.player1 : gameState.player2;
+      const nameLost = playerLost==1 ? gameState.player1 : gameState.player2;
+    
+      if(leaderBoard == undefined){
+        cookies.set('leaderBoard', [{name: nameWon, score: [1,0,0]}, {name: nameLost, score: [0,1,0]}]);
+      }
+      else{
+        const winnerInList = (element) => element.name == nameWon;
+        const loserInList = (element) => element.name == nameLost;
+        leaderBoard.find(winnerInList).score[0]++;
+        leaderBoard.find(loserInList).score[1]++;
+        cookies.set('leaderBoard', leaderBoard);
+      }
+    }
+    else{
+      const nameOne = gameState.player1;
+      const nameTwo = gameState.player2;
+
+      if(leaderBoard == undefined){
+        cookies.set('leaderBoard', [{name: nameOne, score: [0,0,1]}, {name: nameTwo, score: [0,0,1]}]);
+      }
+
+      else{
+        const playerOneInList = (element) => element.name == nameOne;
+        const playerTwoInList = (element) => element.name == nameTwo;
+        leaderBoard.find(playerOneInList).score[2]++;
+        leaderBoard.find(playerTwoInList).score[2]++;
+        cookies.set('leaderBoard', leaderBoard);
+      }
+    }
+  }, []);
 
   const loadSave = useCallback((savedGameState, savedCurrentPlayer, savedActiveGame, 
     savedGameWon, savedFullGames, savedWinner) => {
